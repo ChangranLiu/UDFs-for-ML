@@ -20,10 +20,13 @@ To Contribute to the UDF Library
    * [str_to_int](#str_to_int) - Given a string of numbers convert into an int
    * [float_to_int](#float_to_int) - Given a float convert it into an int
    * [echo_int](#echo_int) - Given an int echo an int
-   * [rand_int](#rand_int) - Given a min and max int generate a random integer
 * [Geo Based UDF](#geo-based-udf)
    * [getNearbyGridId](#getnearbygridid) - Given a distance in km and lat and lon return nearby
    * [geoDistance](#geodistance) - Given a a starting & ending lat and long calculate the distance
+* [Random Generator UDF](#random-generator-udf)
+   * [rand_int](#rand_int) - Given a min and max int generate a random integer
+   * [rand_normal](#rand_normal) - Given a distance in km and lat and lon return nearby
+   * [rand_uniform](#rand_uniform) - Given a a starting & ending lat and long calculate the distance
 
 ## String Based UDF
 ### substring
@@ -237,6 +240,7 @@ inline int64_t rand_int (int minVal, int maxVal) {
 
 }
 ```
+
 **Example**
 *Need to add*
 
@@ -341,5 +345,127 @@ Given a a starting & ending lat and long calculate the distance
     return 2.0 * earthRadiusKm * asin(sqrt(u * u + cos(phi_1) * cos(phi_2) * v * v));
   }
 ```
+**Example**
+*Need to add*
+
+-----------
+
+### rand_normal
+Generate a random number from a standard normal distribution 
+
+**UDF Code**
+```
+  inline double rand_normal () {
+      unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+      std::default_random_engine generator(seed);
+      std::normal_distribution<double> distribution(0,1);
+      double y = distribution(generator);
+      return y;
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### rand_uniform
+Generate a random number from a uniform distribution between 0 and 1
+
+**UDF Code**
+```
+  inline double rand_uniform () {
+      unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+      srand(seed);
+      double y = ((double) rand() / (RAND_MAX));
+      return y;
+  }
+```
+
+**Example**
+*Need to add*
+
+
+-----------
+
+### rand_choice
+Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution
+**UDF Code**
+```
+  inline int64_t rand_choice (MapAccum<int64_t, double>& Prob_Map) {
+      std::vector<double> y_prob;
+      std::vector<int64_t> y_id;
+      for (auto yp : Prob_Map){
+        y_id.push_back(yp.first);
+        y_prob.push_back(yp.second);
+      }
+      unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+      std::default_random_engine generator(seed);
+      std::discrete_distribution<int> distribution(y_prob.begin(),y_prob.end());
+      int id = distribution(generator);
+      return y_id[id];
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### rand_choice_from_map (need to be optimized)
+Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution
+**UDF Code**
+```
+  inline int64_t rand_choice_from_map (MapAccum<int64_t, double>& Prob_Map) {
+      std::vector<double> y_prob;
+      std::vector<int64_t> y_id;
+      for (auto yp : Prob_Map){
+        y_id.push_back(yp.first);
+        y_prob.push_back(yp.second);
+      }
+      unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+      std::default_random_engine generator(seed);
+      std::discrete_distribution<int> distribution(y_prob.begin(),y_prob.end());
+      int id = distribution(generator);
+      return y_id[id];
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### rand_choice_from_list
+Given a list with the value of each index representing the probability distribution, return a index randomly sampled from the list according to the probability distribution
+**UDF Code**
+```
+  inline int rand_choice_from_list(ListAccum<float>& p){
+    std::vector<float> a = p.data_;
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine gen(seed);
+    std::discrete_distribution<> dis(a.begin(), a.end());
+    return dis(gen);
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### rand_choice_from_list
+Given a list with the value of each index representing the probability distribution, return a index randomly sampled from the list according to the probability distribution
+**UDF Code**
+```
+  inline int rand_choice_from_list(ListAccum<float>& p){
+    std::vector<float> a = p.data_;
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine gen(seed);
+    std::discrete_distribution<> dis(a.begin(), a.end());
+    return dis(gen);
+  }
+```
+
 **Example**
 *Need to add*
