@@ -29,6 +29,8 @@ To Contribute to the UDF Library
    * [rand_uniform](#rand_uniform) - Generate a random number from a uniform distribution between 0 and 1
    * [rand_choice_from_map](#rand_choice_from_map) - Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution
    * [rand_choice_from_list](#rand_choice_from_list) - Given a list with the value of each index representing the probability distribution, return a index randomly sampled from the list according to the probability distribution
+* [Random Generator UDF](#random-generator-udf)
+   * [rand_int](#rand_int) - Given a min and max int generate a random integer
 
 ## String Based UDF
 ### substring
@@ -229,25 +231,6 @@ Given an int echo an int
 
 -----------
 
-### rand_int
-Given a min and max int generate a random integer 
-
-**UDF Code**
-```
-inline int64_t rand_int (int minVal, int maxVal) {
-  std::random_device rd;
-  std::mt19937 e1(rd());
-  std::uniform_int_distribution<int> dist(minVal, maxVal);
-  return (int64_t) dist(e1);
-
-}
-```
-
-**Example**
-*Need to add*
-
------------
-
 ### str_to_int
 Given a string of numbers convert into an int
 
@@ -347,6 +330,27 @@ Given a a starting & ending lat and long calculate the distance
     return 2.0 * earthRadiusKm * asin(sqrt(u * u + cos(phi_1) * cos(phi_2) * v * v));
   }
 ```
+**Example**
+*Need to add*
+
+-----------
+
+## Random Generator UDF
+
+### rand_int
+Given a min and max int generate a random integer 
+
+**UDF Code**
+```
+inline int64_t rand_int (int minVal, int maxVal) {
+  std::random_device rd;
+  std::mt19937 e1(rd());
+  std::uniform_int_distribution<int> dist(minVal, maxVal);
+  return (int64_t) dist(e1);
+
+}
+```
+
 **Example**
 *Need to add*
 
