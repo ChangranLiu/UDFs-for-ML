@@ -24,7 +24,7 @@ To Contribute to the UDF Library
    * [getNearbyGridId](#getnearbygridid) - Given a distance in km and lat and lon return nearby
    * [geoDistance](#geodistance) - Given a a starting & ending lat and long calculate the distance
 * [Random Generator UDF](#random-generator-udf)
-   * [rand_int](#rand_int) - Given a min and max int generate a random integer
+   * [rand_int](#rand_int) - Given a min and max int generate a random integer from a uniform distribution between min and max
    * [rand_normal](#rand_normal) - Generate a random number from a standard normal distribution
    * [rand_uniform](#rand_uniform) - Generate a random number from a uniform distribution between 0 and 1
    * [rand_choice_from_map](#rand_choice_from_map) - Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution
