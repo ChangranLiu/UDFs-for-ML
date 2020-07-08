@@ -455,3 +455,161 @@ Given a list with the value of each index representing the probability distribut
 
 **Example**
 *Need to add*
+
+-----------
+
+## Vector Operator UDF
+
+### dotProduct_ArrayAccum_ArrayAccum
+Given two vectors (as two arrays), return the dot product 
+
+**UDF Code**
+```
+  inline double dotProduct_ArrayAccum_ArrayAccum (ArrayAccum<SumAccum<double>>& aArray, ArrayAccum<SumAccum<double>>& bArray) {
+      double c = 0;
+      for (uint32_t i=0; i < aArray.data_.size(); i++){
+        c += bArray.data_[i]*aArray.data_[i];
+    }
+      return c;
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+## Machine Learning UDF
+
+### softmax_ArrayAccum
+Given a vector v (as an array), return softmax(v) 
+
+**UDF Code**
+```
+  inline ArrayAccum<SumAccum<double>> softmax_ArrayAccum (ArrayAccum<SumAccum<double>>& xArray) {
+      ArrayAccum<SumAccum<double>> yArray(xArray.dim_);
+      std::vector<SumAccum<double>>& data = yArray.data_;
+      double sum = 0;
+      for (uint32_t i=0; i < xArray.data_.size(); i++){
+          yArray.data_[i] = exp(xArray.data_[i]);
+          sum += yArray.data_[i];
+      }
+      for (uint32_t i=0; i < xArray.data_.size(); i++){
+          yArray.data_[i] = yArray.data_[i]/sum;
+      }
+      return yArray;
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### ReLU_ArrayAccum 
+Given a vector v (as an array), return ReLU(v)
+
+**UDF Code**
+```
+  inline ArrayAccum<SumAccum<double>> ReLU_ArrayAccum (ArrayAccum<SumAccum<double>>& xArray) {
+      ArrayAccum<SumAccum<double>> yArray(xArray.dim_);
+      std::vector<SumAccum<double>>& data = yArray.data_;
+      for (uint32_t i=0; i < xArray.data_.size(); i++){
+          if (xArray.data_[i] > 0){
+              yArray.data_[i] = xArray.data_[i];
+          } else{
+              yArray.data_[i] = 0;
+          }
+      }
+      return yArray;
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### sigmoid_ArrayAccum 
+Given a vector v (as an array), return sigmoid(v)
+
+**UDF Code**
+```
+  inline ArrayAccum<SumAccum<double>> sigmoid_ArrayAccum (ArrayAccum<SumAccum<double>>& xArray) {
+      ArrayAccum<SumAccum<double>> yArray(xArray.dim_);
+      std::vector<SumAccum<double>>& data = yArray.data_;
+      for (uint32_t i=0; i < xArray.data_.size(); i++){
+        yArray.data_[i] = 1/(1+exp(-xArray.data_[i]))-xArray.data_[i];
+    }
+      return yArray;
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### dropout_ArrayAccum 
+Given a vector v (as an array) and a dropout rate
+
+**UDF Code**
+```
+  inline ArrayAccum<SumAccum<double>> dropout_ArrayAccum (ArrayAccum<SumAccum<double>>& xArray, double p) {
+      unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+      srand(seed);
+      ArrayAccum<SumAccum<double>> yArray(xArray.dim_);
+      std::vector<SumAccum<double>>& data = yArray.data_;
+      for (uint32_t i=0; i < xArray.data_.size(); i++){
+        if (((double) rand() / (RAND_MAX)) < p){
+              yArray.data_[i] = xArray.data_[i]/p;
+        }
+    }
+      return yArray;
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### dropout_SparseVector 
+Given a spase vector v (as a map) and a dropout rate
+
+**UDF Code**
+```
+  inline MapAccum<int64_t,double> dropout_SparseVector (MapAccum<int64_t,double>& x, double p) {
+      MapAccum<int64_t,double> y;
+      unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+      srand(seed);
+      for (auto it = x.data_.begin(); it != x.data_.end(); ++it) {
+          if (((double) rand() / (RAND_MAX)) < p){
+              y.data_[it->first] += (it->second)/p;
+          }
+      }
+      return y;
+  }
+```
+
+**Example**
+*Need to add*
+
+-----------
+
+### L2Norm_Matrix 
+Given a matrix (as an array), return the L2 norm of the matrix
+
+**UDF Code**
+```
+  inline double L2Norm_Matrix (const ArrayAccum<SumAccum<double>>& M) {
+      double c = 0;
+      for (uint32_t i=0; i < M.data_.size(); i++){
+        c += M.data_[i]*M.data_[i];
+    }
+      return c;
+  }
+```
+
+**Example**
+*Need to add*
