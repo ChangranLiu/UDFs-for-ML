@@ -389,8 +389,9 @@ Generate a random number from a uniform distribution between 0 and 1
 
 -----------
 
-### rand_choice_from_map (need to be optimized)
-Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution
+### rand_choice_from_map
+Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution (need to be optimized)
+
 **UDF Code**
 ```
   inline int64_t rand_choice_from_map (MapAccum<int64_t, double>& Prob_Map) {
@@ -415,24 +416,7 @@ Given a map with the key of each value representing the probability distribution
 
 ### rand_choice_from_list
 Given a list with the value of each index representing the probability distribution, return a index randomly sampled from the list according to the probability distribution
-**UDF Code**
-```
-  inline int rand_choice_from_list(ListAccum<float>& p){
-    std::vector<float> a = p.data_;
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::default_random_engine gen(seed);
-    std::discrete_distribution<> dis(a.begin(), a.end());
-    return dis(gen);
-  }
-```
 
-**Example**
-*Need to add*
-
------------
-
-### rand_choice_from_list
-Given a list with the value of each index representing the probability distribution, return a index randomly sampled from the list according to the probability distribution
 **UDF Code**
 ```
   inline int rand_choice_from_list(ListAccum<float>& p){
