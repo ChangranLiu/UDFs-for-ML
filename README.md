@@ -31,11 +31,27 @@ To Contribute to the UDF Library
    * [rand_choice_from_list](#rand_choice_from_list) - Given a list with the value of each index representing the probability distribution, return a index randomly sampled from the list according to the probability distribution
 * [Vector Operator UDF](#vector-operator-udf)
    * [sum_ArrayAccum](#sum_ArrayAccum) - Given an array, return the sum of the elements
-   * [product_List_const](#product_List_const) - Given an vector and a constant, return the sum of the elements
-   * [product_ArrayAccum_const](#sum_ArrayAccum) - Given an array, return the sum of the elements
-   * [product_Matrix_const](#product_Matrix_const) - Given an array, return the sum of the elements
-   * [diff_ArrayAccum_List](#diff_ArrayAccum_List) - Given an array, return the sum of the elements
-   * [product_sparseVector_ArrayAccum](#product_sparseVector_ArrayAccum) - Given an array, return the sum of the elements
+   * [diff_ArrayAccum_List](#diff_ArrayAccum_List) - Given two vectors, return a vector as the difference
+   * [product_List_const](#product_List_const) - Given an vector (as a list) and a constant, return an vector as the product
+   * [product_ArrayAccum_const](#sum_ArrayAccum) - Given an vector (as an array) and a constant, return an vector as the product
+   * [product_Matrix_const](#product_Matrix_const) - Given an matrix and a constant, return an matrix as the product
+   * [product_sparseVector_ArrayAccum](#product_sparseVector_ArrayAccum) - Given a sparse vector (as a map) and a vector (as an array), return the Hadamard product
+   * [product_ArrayAccum_ArrayAccum](#product_ArrayAccum_ArrayAccum) - Given two vectors, return the Hadamard product
+   * [product_Matrix_SparseVector](#product_Matrix_SparseVector) - Given a matrix and a sparse vector, return the product
+   * [product_Matrix_Vector](#product_Matrix_Vector) - Given a matrix A and a vector x, return the product Ax
+   * [product_Vector_Matrix](#product_Vector_Matrix) - Given a matrix A and a vector x, return the product x^TA
+   * [dotProduct_ArrayAccum_List](#dotProduct_ArrayAccum_List) - Given a vector (as an array) and a vector (as a list), return the dot product
+   * [dotProduct_List_List](#dotProduct_List_List) - Given two vectors (as two lists), return the dot product
+   * [dotProduct_ArrayAccum_ArrayAccum](#dotProduct_ArrayAccum_ArrayAccum) - Given two vectors (as two arrays), return the dot product
+   * [unit_ArrayAccum](#unit_ArrayAccum) - Given an interger n, generate a ones (as an array) of length n
+   * [unit_List](#unit_List) - Given an interger n, generate a ones (as a list) of length n
+* [Machine Learning UDF](#machine-learning-udf)
+   * [softmax_ArrayAccum](#softmax_ArrayAccum) - Given a vector v (as an array), return softmax(v)
+   * [ReLU_ArrayAccum](#ReLU_ArrayAccum) - Given a vector v (as an array), return ReLU(v)
+   * [sigmoid_ArrayAccum](#sigmoid_ArrayAccum) - Given a vector v (as an array), return sigmoid(v)
+   * [dropout_ArrayAccum](#dropout_ArrayAccum) - Given a vector v (as an array) and a dropout rate
+   * [dropout_SparseVector](#dropout_SparseVector) - Given a spase vector v (as a map) and a dropout rate
+   * [L2Norm_Matrix](#L2Norm_Matrix) - Given a matrix (as an array), return the L2 norm of the matrix
 
 ## String Based UDF
 ### substring
