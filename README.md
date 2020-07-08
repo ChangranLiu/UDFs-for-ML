@@ -25,8 +25,10 @@ To Contribute to the UDF Library
    * [geoDistance](#geodistance) - Given a a starting & ending lat and long calculate the distance
 * [Random Generator UDF](#random-generator-udf)
    * [rand_int](#rand_int) - Given a min and max int generate a random integer
-   * [rand_normal](#rand_normal) - Given a distance in km and lat and lon return nearby
-   * [rand_uniform](#rand_uniform) - Given a a starting & ending lat and long calculate the distance
+   * [rand_normal](#rand_normal) - Generate a random number from a standard normal distribution
+   * [rand_uniform](#rand_uniform) - Generate a random number from a uniform distribution between 0 and 1
+   * [rand_choice_from_map](#rand_choice_from_map) - Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution
+   * [rand_choice_from_list](#rand_choice_from_list) - Given a list with the value of each index representing the probability distribution, return a index randomly sampled from the list according to the probability distribution
 
 ## String Based UDF
 ### substring
@@ -379,31 +381,6 @@ Generate a random number from a uniform distribution between 0 and 1
       srand(seed);
       double y = ((double) rand() / (RAND_MAX));
       return y;
-  }
-```
-
-**Example**
-*Need to add*
-
-
------------
-
-### rand_choice
-Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution
-**UDF Code**
-```
-  inline int64_t rand_choice (MapAccum<int64_t, double>& Prob_Map) {
-      std::vector<double> y_prob;
-      std::vector<int64_t> y_id;
-      for (auto yp : Prob_Map){
-        y_id.push_back(yp.first);
-        y_prob.push_back(yp.second);
-      }
-      unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-      std::default_random_engine generator(seed);
-      std::discrete_distribution<int> distribution(y_prob.begin(),y_prob.end());
-      int id = distribution(generator);
-      return y_id[id];
   }
 ```
 
