@@ -29,8 +29,13 @@ To Contribute to the UDF Library
    * [rand_uniform](#rand_uniform) - Generate a random number from a uniform distribution between 0 and 1
    * [rand_choice_from_map](#rand_choice_from_map) - Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution
    * [rand_choice_from_list](#rand_choice_from_list) - Given a list with the value of each index representing the probability distribution, return a index randomly sampled from the list according to the probability distribution
-* [Random Generator UDF](#random-generator-udf)
-   * [rand_int](#rand_int) - Given a min and max int generate a random integer
+* [Vector Operator UDF](#vector-operator-udf)
+   * [sum_ArrayAccum](#sum_ArrayAccum) - Given an array, return the sum of the elements
+   * [product_List_const](#product_List_const) - Given an vector and a constant, return the sum of the elements
+   * [product_ArrayAccum_const](#sum_ArrayAccum) - Given an array, return the sum of the elements
+   * [product_Matrix_const](#product_Matrix_const) - Given an array, return the sum of the elements
+   * [diff_ArrayAccum_List](#diff_ArrayAccum_List) - Given an array, return the sum of the elements
+   * [product_sparseVector_ArrayAccum](#product_sparseVector_ArrayAccum) - Given an array, return the sum of the elements
 
 ## String Based UDF
 ### substring
