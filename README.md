@@ -390,9 +390,9 @@ Generate a random number from a uniform distribution between 0 and 1
 -----------
 
 ### rand_choice_from_map
-Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution (need to be optimized)
+Given a map with the key of each value representing the probability distribution, return a key randomly sampled from the map according to the probability distribution 
 
-**UDF Code**
+**UDF Code** (need to be optimized)
 ```
   inline int64_t rand_choice_from_map (MapAccum<int64_t, double>& Prob_Map) {
       std::vector<double> y_prob;
