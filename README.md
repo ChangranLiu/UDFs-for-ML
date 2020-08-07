@@ -16,6 +16,7 @@ To Contribute to the UDF Library
   * [regex_filter_set](#regex_filter_set) - Given a set and regular expression filter out strings and return the set
   * [regex_filter_list](#regex_filter_list) - Given a list and regular expression filter out strings and return the list
   * [double_to_string](#double_to_string) - Given a double output a string
+  * [int_to_string](#int_to_string) - Given a int output a string in regular format (not using scientific notation)
  * [Integer/Float Based UDF](#integerfloat-based-udf)
    * [str_to_int](#str_to_int) - Given a string of numbers convert into an int
    * [float_to_int](#float_to_int) - Given a float convert it into an int
@@ -228,6 +229,22 @@ Given a double output a string
   inline string bigint_to_string (double val) {
     char result[200];
     sprintf(result, "%.0f", val);
+    return string(result);
+  }
+```
+**Example**
+*Need to add*
+
+-----------
+
+### int_to_string
+Given a int output a string in regular format (not using scientific notation)
+
+**UDF Code**
+```
+  inline string int_to_string (uint64_t val) {
+    char result[200];
+    sprintf(result, "%u", val);
     return string(result);
   }
 ```
