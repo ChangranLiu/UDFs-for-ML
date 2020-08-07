@@ -53,6 +53,7 @@ To Contribute to the UDF Library
    * [dropout_ArrayAccum](#dropout_ArrayAccum) - Given a vector v (as an array) and a dropout rate
    * [dropout_SparseVector](#dropout_SparseVector) - Given a spase vector v (as a map) and a dropout rate
    * [L2Norm_Matrix](#L2Norm_Matrix) - Given a matrix (as an array), return the L2 norm of the matrix
+* [Others](#others)
 
 ## String Based UDF
 ### substring
@@ -630,3 +631,16 @@ Given a matrix (as an array), return the L2 norm of the matrix
 
 **Example**
 *Need to add*
+
+## Others
+
+### getHH 
+Get the VERTEX hh in a tuple
+
+**UDF Code**
+```
+  template <typename tuple>
+  inline VERTEX getHH (tuple tup) {
+    return tup.hh;
+  }
+```
